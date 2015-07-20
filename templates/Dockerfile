@@ -1,0 +1,13 @@
+FROM gitinsky/baseimage:0.1.8
+MAINTAINER Git In Sky <support@gitinsky.com>
+
+RUN \
+  cd / && apt-get update && apt-get install -y libfontconfig && \
+  curl -s -o /grafana_latest_amd64.deb https://grafanarel.s3.amazonaws.com/builds/grafana_2.0.2_amd64.deb && \
+  dpkg -i /grafana_latest_amd64.deb && \
+  mkdir /usr/share/grafana/data && \
+  rm -f /grafana_latest_amd64.deb
+
+COPY start.sh /start.sh
+
+CMD ["/start.sh"]
