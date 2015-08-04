@@ -1,4 +1,4 @@
-FROM gitinsky/baseimage:0.1.8
+FROM gitinsky/baseimage:0.1.9
 MAINTAINER Git In Sky <support@gitinsky.com>
 
 RUN \
