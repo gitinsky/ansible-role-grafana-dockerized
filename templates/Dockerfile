@@ -2,12 +2,12 @@ FROM gitinsky/baseimage:0.1.9
 MAINTAINER Git In Sky <support@gitinsky.com>
 
 RUN \
-  cd / && apt-get update && apt-get install -y libfontconfig && \
-  curl -s -o /grafana_latest_amd64.deb https://grafanarel.s3.amazonaws.com/builds/grafana_2.1.3_amd64.deb && \
-  dpkg -i /grafana_latest_amd64.deb && \
-  mkdir /usr/share/grafana/data && \
-  rm -f /grafana_latest_amd64.deb
+  echo "deb https://packagecloud.io/grafana/stable/debian/ wheezy main" > /etc/apt/sources.list.d/packagecloud_io_grafana_stable_debian.list && \
+  curl https://packagecloud.io/gpg.key | sudo apt-key add - && \
+  apt-get update && apt-get install -y grafana && \
+  mkdir /usr/share/grafana/data && echo {{ version.stdout }}
 
 COPY start.sh /start.sh
 
 CMD ["/start.sh"]
+EXPOSE 3000
