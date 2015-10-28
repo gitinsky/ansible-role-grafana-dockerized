@@ -1,4 +1,11 @@
 ---
+- name: install curl
+  apt: name=curl
+
+- name: find out the number of latest version
+  shell: curl -s https://packagecloud.io/grafana/stable/|grep -E '_amd64.deb<'|sed -E 's/[^>]*>grafana_([0-9.]+)_.*/\1/'|sort -n|tail -1
+  register: version
+
 - name: make a build dir
   file: state=directory name=/root/grafana-dockerized
 
@@ -9,7 +16,7 @@
   template: src=start.sh dest=/root/grafana-dockerized/start.sh mode=0755
 
 - name: build a Docker image for Grafana
-  command: docker build -t gitinsky/grafana:0.1.4 --rm /root/grafana-dockerized
+  command: docker build -t gitinsky/grafana:{{ version.stdout }} --rm /root/grafana-dockerized
 
 - name: tag it as latest
   command: docker build -t gitinsky/grafana:latest --rm /root/grafana-dockerized
