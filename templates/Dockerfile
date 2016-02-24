@@ -3,7 +3,7 @@ MAINTAINER Git In Sky <support@gitinsky.com>
 
 RUN \
   cd / && apt-get update && apt-get install -y libfontconfig && \
-  curl -s -o /grafana_latest_amd64.deb https://grafanarel.s3.amazonaws.com/builds/grafana_2.1.3_amd64.deb && \
+  curl -s -o /grafana_latest_amd64.deb https://grafanarel.s3.amazonaws.com/builds/grafana_2.6.0_amd64.deb && \
   dpkg -i /grafana_latest_amd64.deb && \
   mkdir /usr/share/grafana/data && \
   rm -f /grafana_latest_amd64.deb
