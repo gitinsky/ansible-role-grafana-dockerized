@@ -9,7 +9,7 @@
   template: src=start.sh dest=/root/grafana-dockerized/start.sh mode=0755
 
 - name: build a Docker image for Grafana
-  command: docker build -t gitinsky/grafana:0.1.9 --rm /root/grafana-dockerized
+  command: docker build -t gitinsky/grafana:0.2.1 --rm /root/grafana-dockerized
 
 - name: tag it as latest
   command: docker build -t gitinsky/grafana:latest --rm /root/grafana-dockerized
